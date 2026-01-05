@@ -9,22 +9,22 @@ class Like {
   }
 
   events() {
-    document.querySelector(".like-box").addEventListener("click", e => this.ourClickDispatcher(e))
+    const likeBox = document.querySelector(".like-box")
+    if (!likeBox) return
+
+    likeBox.addEventListener("click", e => this.ourClickDispatcher(e))
   }
 
   // methods
   ourClickDispatcher(e) {
-    let currentLikeBox = e.target
-    while (!currentLikeBox.classList.contains("like-box")) {
-      currentLikeBox = currentLikeBox.parentElement
-    }
+  const currentLikeBox = e.target.closest(".like-box")
+  if (!currentLikeBox) return
 
-    if (currentLikeBox.getAttribute("data-exists") == "yes") {
-      this.deleteLike(currentLikeBox)
-    } else {
-      this.createLike(currentLikeBox)
-    }
-  }
+  const exists = currentLikeBox.getAttribute("data-exists")
+
+  if (exists === "yes") this.deleteLike(currentLikeBox)
+  else this.createLike(currentLikeBox)
+}
 
   async createLike(currentLikeBox) {
     try {

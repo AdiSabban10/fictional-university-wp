@@ -1,76 +1,77 @@
 class GMap {
   constructor() {
-    document.querySelectorAll(".acf-map").forEach(el => {
-      this.new_map(el)
-    })
+    // If Google Maps is not loaded yet – do not run anything
+    if (!window.google || !window.google.maps) return
+
+    const maps = document.querySelectorAll(".acf-map")
+    if (!maps.length) return
+
+    maps.forEach(el => this.new_map(el))
   }
 
   new_map($el) {
-    var $markers = $el.querySelectorAll(".marker")
+    if (!$el) return
 
-    var args = {
+    const $markers = $el.querySelectorAll(".marker")
+    if (!$markers.length) return
+
+    const args = {
       zoom: 16,
       center: new google.maps.LatLng(0, 0),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
 
-    var map = new google.maps.Map($el, args)
+    const map = new google.maps.Map($el, args)
     map.markers = []
-    var that = this
 
-    // add markers
-    $markers.forEach(function (x) {
-      that.add_marker(x, map)
-    })
+    $markers.forEach(markerEl => this.add_marker(markerEl, map))
 
-    // center map
-    this.center_map(map)
-  } // end new_map
+    // Center the map only if markers were actually added
+    if (map.markers.length) this.center_map(map)
+  }
 
   add_marker($marker, map) {
-    var latlng = new google.maps.LatLng($marker.getAttribute("data-lat"), $marker.getAttribute("data-lng"))
+    if (!$marker) return
 
-    var marker = new google.maps.Marker({
+    const lat = $marker.getAttribute("data-lat")
+    const lng = $marker.getAttribute("data-lng")
+    if (!lat || !lng) return
+
+    const latlng = new google.maps.LatLng(parseFloat(lat), parseFloat(lng))
+
+    const marker = new google.maps.Marker({
       position: latlng,
       map: map
     })
 
     map.markers.push(marker)
 
-    // if marker contains HTML, add it to an infoWindow
-    if ($marker.innerHTML) {
-      // create info window
-      var infowindow = new google.maps.InfoWindow({
-        content: $marker.innerHTML
-      })
-
-      // show info window when marker is clicked
+    const html = $marker.innerHTML?.trim()
+    if (html) {
+      const infowindow = new google.maps.InfoWindow({ content: html })
       google.maps.event.addListener(marker, "click", function () {
         infowindow.open(map, marker)
       })
     }
-  } // end add_marker
+  }
 
   center_map(map) {
-    var bounds = new google.maps.LatLngBounds()
+    if (!map?.markers?.length) return
 
-    // loop through all markers and create bounds
-    map.markers.forEach(function (marker) {
-      var latlng = new google.maps.LatLng(marker.position.lat(), marker.position.lng())
+    const bounds = new google.maps.LatLngBounds()
 
-      bounds.extend(latlng)
+    map.markers.forEach(marker => {
+      if (!marker?.position) return
+      bounds.extend(marker.position)
     })
 
-    // only 1 marker?
-    if (map.markers.length == 1) {
-      // set center of map
+    if (map.markers.length === 1) {
       map.setCenter(bounds.getCenter())
       map.setZoom(16)
     } else {
-      // fit to bounds
       map.fitBounds(bounds)
     }
-  } // end center_map
+  }
 }
 
 export default GMap

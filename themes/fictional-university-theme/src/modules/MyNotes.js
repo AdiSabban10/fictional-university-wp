@@ -11,7 +11,9 @@ class MyNotes {
 
   events() {
     this.myNotes.addEventListener("click", e => this.clickHandler(e))
-    document.querySelector(".submit-note").addEventListener("click", () => this.createNote())
+
+    const submitBtn = document.querySelector(".submit-note")
+    if (submitBtn) submitBtn.addEventListener("click", () => this.createNote())
   }
 
   clickHandler(e) {
@@ -20,17 +22,22 @@ class MyNotes {
     if (e.target.classList.contains("update-note") || e.target.classList.contains("fa-arrow-right")) this.updateNote(e)
   }
 
+  // findNearestParentLi(el) {
+  //   let thisNote = el
+  //   while (thisNote.tagName != "LI") {
+  //     thisNote = thisNote.parentElement
+  //   }
+  //   return thisNote
+  // }
   findNearestParentLi(el) {
-    let thisNote = el
-    while (thisNote.tagName != "LI") {
-      thisNote = thisNote.parentElement
-    }
-    return thisNote
+  const li = el.closest("li")
+  return li || null
   }
 
   // Methods will go here
   editNote(e) {
     const thisNote = this.findNearestParentLi(e.target)
+    if (!thisNote) return
 
     if (thisNote.getAttribute("data-state") == "editable") {
       this.makeNoteReadOnly(thisNote)
@@ -61,6 +68,7 @@ class MyNotes {
 
   async deleteNote(e) {
     const thisNote = this.findNearestParentLi(e.target)
+    if (!thisNote) return
 
     try {
       const response = await axios.delete(universityData.root_url + "/wp-json/wp/v2/note/" + thisNote.getAttribute("data-id"))
@@ -81,6 +89,7 @@ class MyNotes {
 
   async updateNote(e) {
     const thisNote = this.findNearestParentLi(e.target)
+    if (!thisNote) return
 
     var ourUpdatedPost = {
       "title": thisNote.querySelector(".note-title-field").value,
