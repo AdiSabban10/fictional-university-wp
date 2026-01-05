@@ -76,6 +76,45 @@
 <div class="hero-slider">
     <div data-glide-el="track" class="glide__track">
     <div class="glide__slides">
+        <?php
+        $slides = null;
+        if (function_exists('get_field')) {
+            $slides = new WP_Query(array(
+                'post_type' => 'homepage_slide',
+                'posts_per_page' => -1,
+                'orderby' => array(
+                    'menu_order' => 'ASC',
+                    'date' => 'DESC'
+                ),
+                'post_status' => 'publish'
+            ));
+        }
+
+        if ($slides && $slides->have_posts()) :
+            while ($slides->have_posts()) : $slides->the_post();
+                $bg_image = get_field('slide_background_image');
+                $title = get_field('slide_title');
+                $subtitle = get_field('slide_subtitle');
+                
+                // Skip incomplete slides
+                if (!$bg_image || !$title) {
+                    continue;
+                }
+
+                $button_text = get_field('slide_button_text') ?: 'Learn more';
+                $button_url = get_field('slide_button_url') ?: '#';
+        ?>
+        <div class="hero-slider__slide" style="background-image: url(<?php echo esc_url($bg_image); ?>)">
+        <div class="hero-slider__interior container">
+            <div class="hero-slider__overlay">
+            <h2 class="headline headline--medium t-center"><?php echo esc_html($title); ?></h2>
+            <p class="t-center"><?php echo esc_html($subtitle); ?></p>
+            <p class="t-center no-margin"><a href="<?php echo esc_url($button_url); ?>" class="btn btn--blue"><?php echo esc_html($button_text); ?></a></p>
+            </div>
+        </div>
+        </div>
+        <?php endwhile; wp_reset_postdata();
+        else : ?>
         <div class="hero-slider__slide" style="background-image: url(<?php echo get_theme_file_uri('/images/bus.jpg') ?>)">
         <div class="hero-slider__interior container">
             <div class="hero-slider__overlay">
@@ -103,6 +142,7 @@
             </div>
         </div>
         </div>
+        <?php endif; ?>
     </div>
     <div class="slider__bullets glide__bullets" data-glide-el="controls[nav]"></div>
     </div>
