@@ -76,7 +76,6 @@
 
 /* GlideJS */
 .glide__bullets {
-  z-index: 100;
   position: absolute;
   left: 0;
   right: 0;
@@ -84,6 +83,9 @@
   margin: 0;
   text-align: center;
   top: 15px;
+  z-index: 100;
+  transform: none;
+  display: block;
   @include atMedium {
     top: 50px;
   }
@@ -110,3 +112,5 @@
     background-color: #fff;
   }
 }
+
+
