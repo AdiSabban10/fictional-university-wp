@@ -113,7 +113,6 @@
             }
 
             $button_text = get_field('slide_button_text') ?: 'Learn more';
-            $button_url  = get_field('slide_button_url') ?: '#';
       ?>
         <div class="hero-slider__slide" style="background-image: url(<?php echo esc_url($bg_image); ?>)">
           <div class="hero-slider__interior container">
@@ -121,7 +120,7 @@
               <h2 class="headline headline--medium t-center"><?php echo esc_html($title); ?></h2>
               <p class="t-center"><?php echo esc_html($subtitle); ?></p>
               <p class="t-center no-margin">
-                <a href="<?php echo esc_url($button_url); ?>" class="btn btn--blue"><?php echo esc_html($button_text); ?></a>
+                <a href="<?php echo esc_url(get_permalink()); ?>" class="btn btn--blue"><?php echo esc_html($button_text); ?></a>
               </p>
             </div>
           </div>

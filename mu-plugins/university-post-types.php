@@ -106,9 +106,11 @@ function university_post_types() {
 
   // Homepage Slide Post Type
   register_post_type('homepage_slide', array(
-    'supports' => array('title', 'page-attributes'),
-    'public' => false,
-    'show_ui' => true,
+    'show_in_rest' => true,
+    'supports' => array('title', 'editor', 'page-attributes'),
+    'rewrite' => array('slug' => 'slides'),
+    'has_archive' => true,
+    'public' => true,
     'labels' => array(
       'name' => 'Homepage Slides',
       'add_new_item' => 'Add New Slide',
