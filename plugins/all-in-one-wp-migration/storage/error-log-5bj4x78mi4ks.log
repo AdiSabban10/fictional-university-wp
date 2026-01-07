@@ -1,0 +1,6 @@
+Jan 06 2026 04:47:11
+{"Number":2,"Message":"rmdir(C:\\Users\\User\\Local Sites\\fictional-university\\app\\public\\wp-content\\plugins\\all-in-one-wp-migration\\storage\\5bj4x78mi4ks): Directory not empty","File":"C:\\Users\\User\\Local Sites\\fictional-university\\app\\public\\wp-content\\plugins\\all-in-one-wp-migration\\lib\\vendor\\servmask\\filesystem\\class-ai1wm-directory.php","Line":74}
+
+Jan 06 2026 04:47:11
+{"Number":2,"Message":"filesize(): stat failed for C:\\Users\\User\\Local Sites\\fictional-university\\app\\public\\wp-content\\plugins\\all-in-one-wp-migration\\storage\\5bj4x78mi4ks\\localhost-20260106-044530-7j8nn8d103ra.wpress","File":"C:\\Users\\User\\Local Sites\\fictional-university\\app\\public\\wp-content\\plugins\\all-in-one-wp-migration\\lib\\vendor\\servmask\\archiver\\class-ai1wm-archiver.php","Line":233}
+

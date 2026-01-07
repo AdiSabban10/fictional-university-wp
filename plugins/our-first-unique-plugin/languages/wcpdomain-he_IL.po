@@ -1,0 +1,40 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Our Test Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-06 20:05+0000\n"
+"PO-Revision-Date: 2026-01-06 20:08+0000\n"
+"Last-Translator: Adi\n"
+"Language-Team: Hebrew\n"
+"Language: he_IL\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.8.0; wp-6.9; php-8.2.27\n"
+"X-Domain: wcpdomain"
+
+#. Description of the plugin
+msgid "A truly amazing plugin."
+msgstr ""
+
+#. Author of the plugin
+msgid "Adi"
+msgstr ""
+
+#. Name of the plugin
+msgid "Our Test Plugin"
+msgstr ""
+
+#: our-first-unique-plugin.php:45
+msgid "This post has"
+msgstr "לפוסט הזה יש"
+
+#: our-first-unique-plugin.php:108
+msgid "Word Count"
+msgstr "ספירת מילים"
+
+#: our-first-unique-plugin.php:45
+msgid "words"
+msgstr "מילים"
