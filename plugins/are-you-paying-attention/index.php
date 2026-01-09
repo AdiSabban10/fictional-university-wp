@@ -15,43 +15,16 @@ class AreYouPayingAttention {
   }
 
   function adminAssets() {
-    wp_register_style('quizeditcss', plugin_dir_url(__FILE__) . 'build/index.css');
-    wp_register_script('ournewblocktype', plugin_dir_url(__FILE__) . 'build/index.js', array('wp-blocks', 'wp-element', 'wp-editor'));
-    register_block_type('ourplugin/are-you-paying-attention', array(
-      'editor_script' => 'ournewblocktype',
-      'editor_style' => 'quizeditcss',
+    register_block_type(__DIR__, array(
       'render_callback' => array($this, 'theHTML')
     ));
   }
 
   function theHTML($attributes) {
-  if (!is_admin()) {
-    $assetFile = include plugin_dir_path(__FILE__) . 'build/frontend.asset.php';
-
-    wp_enqueue_script(
-      'attentionFrontend',
-      plugin_dir_url(__FILE__) . 'build/frontend.js',
-      $assetFile['dependencies'],
-      $assetFile['version'],
-      true
-    );
-
-    wp_enqueue_style(
-      'attentionFrontendStyles',
-      plugin_dir_url(__FILE__) . 'build/frontend.css',
-      array(),
-      $assetFile['version']
-    );
+    ob_start(); ?>
+    <div class="paying-attention-update-me"><pre style="display: none;"><?php echo wp_json_encode($attributes) ?></pre></div>
+    <?php return ob_get_clean();
   }
-
-  ob_start(); ?>
-    <div class="paying-attention-update-me">
-        <pre style="display: none;"><?php echo wp_json_encode($attributes) ?></pre>
-    </div>
-
-  <?php return ob_get_clean();
-}
-
 }
 
 $areYouPayingAttention = new AreYouPayingAttention();

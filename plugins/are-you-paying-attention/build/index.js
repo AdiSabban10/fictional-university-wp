@@ -16231,6 +16231,12 @@ wp.blocks.registerBlockType("ourplugin/are-you-paying-attention", {
   }
 });
 function EditComponent(props) {
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
+    className: "paying-attention-edit-block",
+    style: {
+      backgroundColor: props.attributes.bgColor
+    }
+  });
   function updateQuestion(value) {
     props.setAttributes({
       question: value
@@ -16255,10 +16261,7 @@ function EditComponent(props) {
     });
   }
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-    className: "paying-attention-edit-block",
-    style: {
-      backgroundColor: props.attributes.bgColor
-    },
+    ...blockProps,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.AlignmentToolbar, {
         value: props.attributes.theAlignment,
@@ -16297,6 +16300,7 @@ function EditComponent(props) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Flex, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FlexBlock, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+            autoFocus: answer == undefined,
             value: answer,
             onChange: newValue => {
               const newAnswers = props.attributes.answers.concat([]);
@@ -16327,7 +16331,7 @@ function EditComponent(props) {
       isPrimary: true,
       onClick: () => {
         props.setAttributes({
-          answers: props.attributes.answers.concat([""])
+          answers: props.attributes.answers.concat([undefined])
         });
       },
       children: "Add another answer"
