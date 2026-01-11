@@ -1,0 +1,2 @@
+<?php
+return ['project-id-version'=>'Featured Professor Block Type','report-msgid-bugs-to'=>'','pot-creation-date'=>'2026-01-10 20:40+0000','po-revision-date'=>'2026-01-10 20:42+0000','last-translator'=>'Adi','language-team'=>'Hebrew','language'=>'he_IL','plural-forms'=>'nplurals=2; plural=n != 1;','mime-version'=>'1.0','content-type'=>'text/plain; charset=UTF-8','content-transfer-encoding'=>'8bit','x-generator'=>'Loco https://localise.biz/','x-loco-version'=>'2.8.0; wp-6.9; php-8.2.27','x-domain'=>'featured-professor','messages'=>['Select a professor'=>'בחר פרופסור']];
