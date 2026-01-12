@@ -1,0 +1,11 @@
+{
+  "name": "fictional-block-theme",
+  "version": "1.0.0",
+  "title": "Fictional Block Theme",
+  "description": "A simple block theme for learning",
+  "author": "Adi",
+  "settings": {},
+  "styles": {},
+  "templateParts": [],
+  "templates": {}
+}
