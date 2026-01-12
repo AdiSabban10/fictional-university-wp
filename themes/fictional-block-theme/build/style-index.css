@@ -412,6 +412,12 @@ li {
   display: none;
 }
 /* BEM Blocks */
+.our-placeholder-block {
+  padding: 20px;
+  text-align: center;
+  font-size: 1.65rem;
+  background: linear-gradient(180deg, #dedede, #adadad);
+}
 .remove-favorite {
   display: inline-block;
   transition: all 0.3s;
@@ -1195,6 +1201,7 @@ body.login {
 .page-banner__bg-image {
   opacity: 0.33;
   background-size: cover;
+  background-position: center center;
   position: absolute;
   top: 0;
   bottom: 0;
