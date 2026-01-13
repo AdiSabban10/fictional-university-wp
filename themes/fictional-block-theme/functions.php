@@ -226,6 +226,8 @@ class PlaceholderBlock {
 }
 
 new PlaceholderBlock("eventsandblogs");
+new PlaceholderBlock("header");
+new PlaceholderBlock("footer");
 
 class JSXBlock {
   function __construct($name, $renderCallback = null, $data = null) {
