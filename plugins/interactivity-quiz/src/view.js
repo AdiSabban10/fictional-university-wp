@@ -3,12 +3,14 @@
  */
 import { store, getContext } from "@wordpress/interactivity"
 
-store("create-block", {
+const { state } = store("create-block", {
 	actions: {
 		guessAttempt: () => {
 			const context = getContext()
 			if (!context.solved) {
 				if (context.index === context.correctAnswer) {
+					state.solvedCount++
+					console.log(state)
 					context.showCongrats = true
 					setTimeout(() => {
 						context.solved = true

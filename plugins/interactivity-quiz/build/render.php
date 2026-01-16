@@ -10,13 +10,24 @@
  * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
  */
 
+	wp_interactivity_state('create-block', array('solvedCount' => 0, 'skyColor' => 'blue'));
+
+	$correctAnswerIndex = isset($attributes['correctAnswer']) ? (int)$attributes['correctAnswer'] : -1;
+
 	$answers = array();
 	for ($i = 0; $i < count($attributes['answers']); $i++) {
-		$answers[$i]['index'] = $i;
-		$answers[$i]['text'] = $attributes['answers'][$i];
-		$answers[$i]['correct'] = $attributes['correctAnswer'] == $i;
+	$answers[$i]['index'] = $i;
+	$answers[$i]['text'] = $attributes['answers'][$i];
+	$answers[$i]['correct'] = ($correctAnswerIndex === $i);
 	}
-	$ourContext = array('answers' => $answers, 'solved' => false, 'showCongrats' => false, 'showSorry' => false, 'correctAnswer' => $attributes['correctAnswer']);
+
+	$ourContext = array(
+	'answers' => $answers,
+	'solved' => false,
+	'showCongrats' => false,
+	'showSorry' => false,
+	'correctAnswer' => $correctAnswerIndex
+	);
 
 ?>
 
