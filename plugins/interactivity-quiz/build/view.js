@@ -68,24 +68,38 @@ __webpack_require__.r(__webpack_exports__);
  * WordPress dependencies
  */
 
-const {
-  state
-} = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.store)('create-block', {
-  state: {
-    get themeText() {
-      return state.isDark ? state.darkText : state.lightText;
-    }
-  },
+(0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.store)("create-block", {
   actions: {
-    toggleOpen() {
+    guessAttempt: () => {
+      const context = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getContext)();
+      if (!context.solved) {
+        if (context.index === context.correctAnswer) {
+          context.showCongrats = true;
+          setTimeout(() => {
+            context.solved = true;
+          }, 1000);
+        } else {
+          context.showSorry = true;
+          setTimeout(() => {
+            context.showSorry = false;
+          }, 2600);
+        }
+      }
+    },
+    toggle: () => {
       const context = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getContext)();
       context.isOpen = !context.isOpen;
-    },
-    toggleTheme() {
-      state.isDark = !state.isDark;
     }
   },
   callbacks: {
+    noclickclass: () => {
+      const context = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getContext)();
+      return context.solved && context.correct;
+    },
+    fadedclass: () => {
+      const context = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getContext)();
+      return context.solved && !context.correct;
+    },
     logIsOpen: () => {
       const {
         isOpen
